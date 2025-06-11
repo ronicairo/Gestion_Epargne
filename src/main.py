@@ -23,20 +23,21 @@ print(df_nettoye.head())
 print(f"Types de données :\n{df_nettoye.dtypes}")
 
 # Étape 5 – Importation des données dans des objets Python
+personnes = import_personnes("personnes.csv")
+epargnes = import_epargnes("epargnes.csv")
+print(f"{len(personnes)} personnes importées")
+print(f"{len(epargnes)} produits d’épargne importés")
+
+# Affiche un exemple
+print(f"Exemple Personne : {personnes[0]}")
+print(f"Exemple Epargne : {epargnes[0]}")
+    
+# Étape 6 – Simulation d’épargne
 if __name__ == "__main__":
-    personnes = import_personnes("personnes.csv")
-    epargnes = import_epargnes("epargnes.csv")
-    print(f"{len(personnes)} personnes importées")
-    print(f"{len(epargnes)} produits d’épargne importés")
-    
-    # Affiche un exemple
-    print(f"Exemple Personne : {personnes[0]}")
-    print(f"Exemple Epargne : {epargnes[0]}")
-    
-    # Simulation d'épargne
     personne = personnes[0]
     objectif = personne.objectif
     duree = personne.duree_epargne
+
     resultats = suggestion_epargne(personne, epargnes, objectif, duree)
 
     print("Résultats de la simulation d'épargne :")

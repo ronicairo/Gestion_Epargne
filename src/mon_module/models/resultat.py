@@ -8,7 +8,7 @@ class ResultatEpargne:
     def afficher(self):
         statut = "✅ Objectif atteint" if self.objectif_atteint else "❌ Objectif non atteint"
         print(f"{self.nom_produit:<25} | Effort : {self.effort_mensuel:.2f} €/mois | "
-              f"Montant net final : {self.montant_net_final:.2f} € | {statut}")
+            f"Montant net final : {self.montant_net_final:.2f} € | {statut}")
 
     def to_dict(self):
         return {

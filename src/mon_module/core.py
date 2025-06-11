@@ -30,17 +30,8 @@ def import_personnes(fichier: str) -> List[Personne]:
                 loyer = float(row.get("loyer") or 0.0)
                 depenses = float(row.get("depenses_mensuelles") or 0.0)
                 objectif = float(row.get("objectif") or 0.0)
-
-                try:
-                    duree = int(float(row.get("duree_epargne")))
-                except:
-                    duree = 0
-
-                try:
-                    versement = float(row.get("versement_mensuel_utilisateur") or 0.0)
-                except:
-                    print(f"[WARNING] Versement utilisateur invalide pour {nom}, valeur par défaut 0.0")
-                    versement = 0.0
+                duree = int(float(row.get("duree_epargne")))
+                versement = float(row.get("versement_mensuel_utilisateur") or 0.0)
 
                 personne = Personne(
                     nom=nom,
@@ -136,21 +127,13 @@ def suggestion_epargne(personne: Personne, epargnes: List[Epargne], objectif: fl
 
         for effort_mensuel in efforts:
             versement_annuel = effort_mensuel * 12
-            # print(f"[DEBUG] Produit: {produit.nom} | Effort mensuel: {effort_mensuel:.2f}€ | Versement annuel: {versement_annuel:.2f}€ | Taux: {produit.taux_interet} | Fiscalité: {produit.fiscalite}")
-            # print(f"[CHECK-CALCUL] produit: {produit.nom}, effort_mensuel: {effort_mensuel}, taux: {produit.taux_interet}, duree: {duree}")
 
             montant_brut = calcul_interets_composes(versement_annuel, produit.taux_interet, duree)
             montant_net = montant_brut * (1 - produit.fiscalite)
-            # print(f"[DEBUG] Montant brut: {montant_brut:.2f}€ | Montant net après fiscalité: {montant_net:.2f}€")
             total_verse = versement_annuel * duree
 
-            # print(f"[DEBUG] Produit: {produit.nom} | Effort mensuel: {effort_mensuel:.2f}€ | Versement annuel: {versement_annuel:.2f}€")
-            # print(f"[DEBUG] Taux: {produit.taux_interet} | Fiscalité: {produit.fiscalite}")
-            # print(f"[DEBUG] Montant brut: {montant_brut:.2f}€ | Montant net: {montant_net:.2f}€")
-
             if produit.versement_max and total_verse > produit.versement_max:
-                # print(f"[INFO] 💰 Plafond dépassé pour {produit.nom} → {total_verse:.2f}€ > {produit.versement_max}")
-                
+                print(f"[INFO] 💰 Plafond dépassé pour {produit.nom} → {total_verse:.2f}€ > {produit.versement_max}")
                 continue 
 
             resultat = ResultatEpargne(
