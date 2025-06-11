@@ -16,7 +16,7 @@ def calcul_interets_composes(versement_annuel: float, taux_annuel: float, duree_
     return round(montant, 2)
 
 def nettoyer_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    # Remplace les chaînes "None", "none", "NaN" et les np.nan par None (valeur manquante standard Python)
+    # Remplace les chaînes "None", "none", "NaN" et les np.nan par None
     df = df.replace(["None", "none", "NaN", np.nan], None)
 
     colonnes_float = ['taux_interet', 'fiscalite', 'versement_max']
