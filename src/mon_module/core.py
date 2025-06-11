@@ -47,7 +47,7 @@ def import_personnes(fichier: str) -> List[Personne]:
                 personnes.append(personne)
 
             except Exception as e:
-                print(f"[ERREUR] Ligne ignorée pour {row.get('nom')}: {e}")
+                print(f"Ligne ignorée pour {row.get('nom')}: {e}")
 
         print(f"{len(personnes)} personnes importées avec succès depuis {fichier}")
         return personnes
@@ -133,7 +133,7 @@ def suggestion_epargne(personne: Personne, epargnes: List[Epargne], objectif: fl
             total_verse = versement_annuel * duree
 
             if produit.versement_max and total_verse > produit.versement_max:
-                print(f"[INFO] 💰 Plafond dépassé pour {produit.nom} → {total_verse:.2f}€ > {produit.versement_max}")
+                print(f"Plafond dépassé pour {produit.nom} → {total_verse:.2f}€ > {produit.versement_max}")
                 continue 
 
             resultat = ResultatEpargne(
