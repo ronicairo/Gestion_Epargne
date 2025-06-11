@@ -5,6 +5,7 @@ from mon_module.models.personne import Personne
 from mon_module.utils import nettoyer_dataframe
 from mon_module.utils import calcul_interets_composes
 from mon_module.models.resultat import ResultatEpargne
+from mon_module.decorateurs import log_comparaison_epargne
 
 def import_personnes(fichier: str) -> List[Personne]:
     ext = fichier.split(".")[-1]
@@ -49,7 +50,7 @@ def import_personnes(fichier: str) -> List[Personne]:
             except Exception as e:
                 print(f"Ligne ignorée pour {row.get('nom')}: {e}")
 
-        print(f"{len(personnes)} personnes importées avec succès depuis {fichier}")
+        # print(f"{len(personnes)} personnes importées avec succès depuis {fichier}")
         return personnes
 
     except Exception as e:
@@ -110,6 +111,7 @@ def save_epargnes(epargnes: List[Epargne], fichier: str):
     except Exception as e:
         print(f"Erreur export épargnes : {e}")
 
+@log_comparaison_epargne
 def suggestion_epargne(personne: Personne, epargnes: List[Epargne], objectif: float, duree: int) -> List[ResultatEpargne]:
     resultats = []
 
