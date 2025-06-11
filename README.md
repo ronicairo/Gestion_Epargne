@@ -26,12 +26,11 @@ Gestion_Projet/
 ```
 
 Dans chaque fichier de test (ex : test_core.py, test_personne.py, etc.), il est nécessaire d’ajouter ceci en haut du fichier pour que les imports fonctionnent correctement :
-
 ```
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-```
+
 
 ## 🚀 Lancer les tests
 
